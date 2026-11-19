@@ -3,8 +3,39 @@ import java.util.Arrays;
 public class Assignment01Q04 {
 
     public static int[] shiftArrayCyclic(int[] array, int move, char direction) {
-        // TODO: implement
+        boolean right;
+        if (array.length == 0) return array;
+        if (direction == 'L')
+            right = false;
+        else if (direction == 'R')
+            right = true;
+        else
+            return array;
+
+        if (move < 0)
+            right = !right;
+        for (int i = 0; i < Math.abs(move); i++) {
+            shiftOnce(right, array);
+        }
+
+
         return array;
+    }
+    public static void shiftOnce(boolean right, int[] array){
+        if (right){
+            int temp = array[array.length - 1];
+            for (int i = array.length - 1; i > 0; i--){
+                array[i] = array[i - 1];
+            }
+            array[0] = temp;
+        }
+        else {
+            int temp = array[0];
+            for (int i = 0; i < array.length - 1; i++){
+                array[i] = array[i + 1];
+            }
+            array[array.length - 1] = temp;
+        }
     }
 
     public static void main(String[] args) {
